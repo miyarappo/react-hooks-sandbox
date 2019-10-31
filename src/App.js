@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const App = props => {
   const [ name, setName ] = useState(props.name)
@@ -8,6 +8,14 @@ const App = props => {
     setPrice(props.price)
     setName(props.name)
   }
+
+  useEffect(() => {
+    console.log('use')
+  })
+
+  useEffect(() => {
+    console.log('aaa')
+  }, [])
 
   return (
     <>
