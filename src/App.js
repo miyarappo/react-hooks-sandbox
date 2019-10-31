@@ -7,7 +7,6 @@ const App = () => {
   const [ body, setBody] = useState('')
 
   const addEvent = e => {
-    console.log('call addEvent', e)
     e.preventDefault()
     dispatch({
       type: 'CREATE_EVENT',
@@ -19,14 +18,18 @@ const App = () => {
   }
 
   const deleteEvent = id => {
-    console.log('call deleteEvent')
     dispatch({
       type: 'DELETE_EVENT',
       id
     })
   }
 
-  console.log('currentState', {state})
+  const dleteAllEvents = e => {
+    e.preventDefault()
+    window.confirm('全てのイベントを本当に削除しても良いですか？') && dispatch({ type: 'DELETE_ALL_EVENTS' })
+  }
+
+  const unCreatable = title === '' || body === ''
 
   return (
     <div>
@@ -40,8 +43,8 @@ const App = () => {
           <label htmlFor="formEventBody">ボディー</label>
           <textarea id="formEventBody" value={body} onChange={e => setBody(e.target.value)} />
         </div>
-        <button onClick={e => addEvent(e)}>イベントを作成する</button>
-        <button>イベントを削除する</button>
+        <button disabled={unCreatable} onClick={e => addEvent(e)}>イベントを作成する</button>
+        <button disabled={state.length === 0} onClick={e => dleteAllEvents(e)}>イベントを削除する</button>
       </form>
 
       <h4>イベント一覧</h4>
