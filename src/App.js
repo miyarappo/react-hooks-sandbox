@@ -1,5 +1,10 @@
 import React, { useReducer, useState, useEffect } from 'react'
 import reducer from './reducers'
+import {
+  CREATE_EVENT,
+  DELETE_EVENT,
+  DELETE_ALL_EVENTS
+} from './actions'
 
 const App = () => {
   const [ state, dispatch ] = useReducer(reducer, [])
@@ -9,7 +14,7 @@ const App = () => {
   const addEvent = e => {
     e.preventDefault()
     dispatch({
-      type: 'CREATE_EVENT',
+      type: CREATE_EVENT,
       title,
       body,
     })
@@ -19,14 +24,14 @@ const App = () => {
 
   const deleteEvent = id => {
     dispatch({
-      type: 'DELETE_EVENT',
+      type: DELETE_EVENT,
       id
     })
   }
 
   const dleteAllEvents = e => {
     e.preventDefault()
-    window.confirm('全てのイベントを本当に削除しても良いですか？') && dispatch({ type: 'DELETE_ALL_EVENTS' })
+    window.confirm('全てのイベントを本当に削除しても良いですか？') && dispatch({ type: DELETE_ALL_EVENTS })
   }
 
   const unCreatable = title === '' || body === ''
