@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AppContext from '../contexts/AppContext'
 import Event from './Event'
 
-const Events = ({ state, dispatch }) => {
-
+const Events = () => {
+  const { state } = useContext(AppContext)
 
   return (
     <>
@@ -19,7 +20,7 @@ const Events = ({ state, dispatch }) => {
             {
               state.map(event => {
                 return (
-                  <Event key={event.id} event={event} dispatch={dispatch} />
+                  <Event key={event.id} event={event} />
                 )})
               }
           </tbody>
