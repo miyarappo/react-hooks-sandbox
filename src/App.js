@@ -1,6 +1,21 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react'
+import reducer from './reducers'
 
 const App = () => {
+  const [ state, dispatch ] = useReducer(reducer, [])
+  const [ title, setTitle] = useState('')
+  const [ body, setBody ] = useState('')
+
+  const addEvent = e => {
+    e.preventDefault()
+    dispatch({
+      type: 'CREATE_EVENT',
+      title,
+      body,
+    })
+    setTitle('')
+    setBody('')
+  }
 
   return (
     <div>
@@ -8,13 +23,13 @@ const App = () => {
       <form>
         <div>
           <label htmlFor="formEventTitle">タイトル</label>
-          <input id="formEventTitle" />
+          <input id="formEventTitle" value={title} onChange={e => setTitle(e.target.value)} />
         </div>
         <div>
           <label htmlFor="formEventBody">ボディー</label>
-          <textarea id="formEventBody" />
+          <textarea id="formEventBody" value={body} onChange={e => setBody(e.target.body)} />
         </div>
-        <button>イベントを作成する</button>
+        <button onClick={addEvent}>イベントを作成する</button>
         <button>イベントを削除する</button>
       </form>
 
@@ -28,7 +43,7 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          
+
         </tbody>
       </table>
     </div>
