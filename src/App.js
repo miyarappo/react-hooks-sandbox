@@ -1,12 +1,13 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useState, useEffect } from 'react'
 import reducer from './reducers'
 
 const App = () => {
   const [ state, dispatch ] = useReducer(reducer, [])
   const [ title, setTitle] = useState('')
-  const [ body, setBody ] = useState('')
+  const [ body, setBody] = useState('')
 
   const addEvent = e => {
+    console.log('call addEvent', e)
     e.preventDefault()
     dispatch({
       type: 'CREATE_EVENT',
@@ -16,6 +17,16 @@ const App = () => {
     setTitle('')
     setBody('')
   }
+
+  const deleteEvent = id => {
+    console.log('call deleteEvent')
+    dispatch({
+      type: 'DELETE_EVENT',
+      id
+    })
+  }
+
+  console.log('currentState', {state})
 
   return (
     <div>
@@ -27,9 +38,9 @@ const App = () => {
         </div>
         <div>
           <label htmlFor="formEventBody">ボディー</label>
-          <textarea id="formEventBody" value={body} onChange={e => setBody(e.target.body)} />
+          <textarea id="formEventBody" value={body} onChange={e => setBody(e.target.value)} />
         </div>
-        <button onClick={addEvent}>イベントを作成する</button>
+        <button onClick={e => addEvent(e)}>イベントを作成する</button>
         <button>イベントを削除する</button>
       </form>
 
@@ -43,7 +54,19 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-
+          {
+            state.map(event => {
+              return (
+                <tr key={event.id}>
+                  <td>{event.id}</td>
+                  <td>{event.title}</td>
+                  <td>{event.body}</td>
+                  <td>
+                    <button type='button' onClick={() => deleteEvent(event.id)}>削除</button>
+                  </td>
+              </tr>
+              )})
+            }
         </tbody>
       </table>
     </div>
