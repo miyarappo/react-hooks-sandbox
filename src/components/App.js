@@ -3,6 +3,7 @@ import reducer from '../reducers'
 import AppContext from '../contexts/AppContext'
 import EventForm from './EventForm'
 import Events from './Events'
+import  OperationLogs from './OperationLogs'
 
 console.log(AppContext)
 
@@ -17,6 +18,7 @@ const App = () => {
     <AppContext.Provider value={{ state, dispatch }}>
       <EventForm />
       <Events />
+      <OperationLogs />
     </AppContext.Provider>
   );
 }

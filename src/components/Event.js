@@ -2,7 +2,10 @@ import React, { useContext } from 'react'
 import AppContext from '../contexts/AppContext'
 import {
   DELETE_EVENT,
+  ADD_OPERATION_LOG
 } from '../actions'
+import { timeCurrentIso8601 } from '../utils'
+
 
 const Event = ({ event }) => {
   const { dispatch } = useContext(AppContext)
@@ -11,6 +14,12 @@ const Event = ({ event }) => {
     dispatch({
       type: DELETE_EVENT,
       id
+    })
+
+    dispatch({
+      type: ADD_OPERATION_LOG,
+      description: `イベント(id=${id})を削除しました`,
+      operationAt: timeCurrentIso8601()
     })
   }
 
