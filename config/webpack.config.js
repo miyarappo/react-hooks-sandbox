@@ -1,4 +1,4 @@
-'use strict';
+
 
 const fs = require('fs');
 const isWsl = require('is-wsl');
@@ -430,6 +430,13 @@ module.exports = function(webpackEnv) {
                 // being evaluated would be much more helpful.
                 sourceMaps: false,
               },
+            },
+            {
+              test: /\.tsx?$/,
+              exclude: /node_modules/,
+              use: {
+                loader: "ts-loader"
+              }
             },
             // "postcss" loader applies autoprefixer to our CSS.
             // "css" loader resolves paths in CSS and adds assets as dependencies.
