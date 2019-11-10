@@ -1,8 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { increment, decrement } from '../reducers/counter'
-
-// suspense
+import { increment, decrement, getUser } from '../reducers/counter'
 
 export const useAsyncActions = () => {
   const dispatch = useDispatch();
@@ -17,7 +15,16 @@ export const useAsyncActions = () => {
     dispatch(decrement(value));
   }, [ dispatch ]);
 
-  return { incrementAsync, decrementAsync };
+  const getUserAsync = useCallback(async (): Promise<void> => {
+    await sleep(1000)
+    const user = {
+      name: 'miyata',
+      age: 27
+    }
+    dispatch(getUser(user))
+  }, [ dispatch ])
+
+  return { incrementAsync, decrementAsync, getUserAsync };
 }
 
 // dummy networking utility
