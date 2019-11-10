@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import { useAsyncActions } from '../actions/counter'
 import { State, User } from '../reducers/counter'
@@ -16,7 +16,12 @@ const Counter: React.FC = () => {
     <div>
       <h1>Redux & Hooks</h1>
       <h2>user info</h2>
-      <div>{user ? user.name : 'loading...'}</div>
+      <Suspense fallback={<div>loading...</div>}>
+        <div>
+          <div>{user && user.name}</div>
+          <div>{user && user.age}</div>
+        </div>
+      </Suspense>
       <div>{count}</div>
       <button onClick={() => incrementAsync(1)}>increment1</button>
       <button onClick={() => incrementAsync(10)}>increment10</button>
