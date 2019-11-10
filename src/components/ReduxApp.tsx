@@ -6,7 +6,7 @@ import Counter from '../components/Counter'
 
 const store = createStore(reducer)
 
-const ReduxApp = () => {
+const ReduxApp: React.FC = () => {
   return (
     <Provider store={store}>
       <Counter />
