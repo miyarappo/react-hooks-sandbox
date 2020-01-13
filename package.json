@@ -8,7 +8,7 @@
     "@babel/plugin-transform-react-jsx-self": "^7.2.0",
     "@babel/plugin-transform-react-jsx-source": "^7.5.0",
     "@svgr/webpack": "4.3.2",
-    "@types/react": "^16.9.11",
+    "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^2.14.0",
     "@typescript-eslint/parser": "^2.2.0",
